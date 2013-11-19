@@ -67,3 +67,13 @@ exports['Evaluate divide integers'] = function (test) {
     test.equal(parser.parse("Expression"), null);
 };
 
+exports['Evaluate add and multiply'] = function (test) {
+    var parser = parsers.createParser("2+3*4");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(null);
+    
+    test.ok(result);
+    test.equal(result, 14);
+    
+    test.equal(parser.parse("Expression"), null);
+};
