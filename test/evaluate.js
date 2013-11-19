@@ -33,3 +33,14 @@ exports['Evaluate subtract integers'] = function (test) {
     
     test.equal(parser.parse("Expression"), null);
 };
+
+exports['Evaluate multiply integers'] = function (test) {
+    var parser = parsers.createParser("2*3");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(null);
+    
+    test.ok(result);
+    test.equal(result, 6);
+    
+    test.equal(parser.parse("Expression"), null);
+};
