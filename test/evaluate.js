@@ -22,3 +22,14 @@ exports['Evaluate add integers'] = function (test) {
     
     test.equal(parser.parse("Expression"), null);
 };
+
+exports['Evaluate subtract integers'] = function (test) {
+    var parser = parsers.createParser("1-2");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(null);
+    
+    test.ok(result);
+    test.equal(result, -1);
+    
+    test.equal(parser.parse("Expression"), null);
+};
