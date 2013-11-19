@@ -77,3 +77,40 @@ exports['Evaluate add and multiply'] = function (test) {
     
     test.equal(parser.parse("Expression"), null);
 };
+
+exports['Evaluate add and divide'] = function (test) {
+    var parser = parsers.createParser("2+3/4");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(null);
+    
+    test.ok(result);
+    test.equal(result, 2 + 3 / 4);
+    
+    test.equal(parser.parse("Expression"), null);
+};
+
+exports['Evaluate multiply and add'] = function (test) {
+    var parser = parsers.createParser("2*3+4");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(null);
+    
+    test.ok(result);
+    test.equal(result, 10);
+    
+    test.equal(parser.parse("Expression"), null);
+};
+
+exports['Evaluate divide and subtract'] = function (test) {
+    var parser = parsers.createParser("2/3-4");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(null);
+    
+    test.ok(result);
+    test.equal(result, 2/3-4);
+    
+    test.equal(parser.parse("Expression"), null);
+};
+
+
+
+
