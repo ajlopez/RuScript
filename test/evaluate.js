@@ -44,3 +44,15 @@ exports['Evaluate multiply integers'] = function (test) {
     
     test.equal(parser.parse("Expression"), null);
 };
+
+exports['Evaluate divide integers'] = function (test) {
+    var parser = parsers.createParser("2/3");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(null);
+    
+    test.ok(result);
+    test.equal(result, 2/3);
+    
+    test.equal(parser.parse("Expression"), null);
+};
+
