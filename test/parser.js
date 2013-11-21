@@ -49,3 +49,34 @@ exports['Get name with spaces'] = function (test) {
     test.equal(parser.parse("Name"), null);
 }
 
+exports['Get statement with end of line'] = function (test) {
+    var parser = parsers.createParser("1+2\n");
+    
+    var result = parser.parse("Statement");
+    test.ok(result);
+    test.equal(parser.parse("Statement"), null);
+}
+
+exports['Get two statements with end of line'] = function (test) {
+    var parser = parsers.createParser("1+2\n3+2\n");
+    
+    var result = parser.parse("Statement");
+    test.ok(result);
+    
+    result = parser.parse("Statement");
+    test.ok(result);
+    
+    test.equal(parser.parse("Statement"), null);
+}
+
+exports['Get two statements with semicolon'] = function (test) {
+    var parser = parsers.createParser("1+2;3+2;");
+    
+    var result = parser.parse("Statement");
+    test.ok(result);
+    
+    result = parser.parse("Statement");
+    test.ok(result);
+    
+    test.equal(parser.parse("Statement"), null);
+}
