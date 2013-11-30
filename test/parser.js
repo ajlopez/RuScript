@@ -31,6 +31,7 @@ exports['Get name'] = function (test) {
     var result = parser.parse("Name");
     
     test.ok(result);
+    test.equal(result.value.getName(), "name");
     test.equal(result.type, "Name");
     
     test.equal(parser.parse("Name"), null);
@@ -42,6 +43,7 @@ exports['Get name with spaces'] = function (test) {
     var result = parser.parse("Name");
     
     test.ok(result);
+    test.equal(result.value.getName(), "name");
     test.equal(result.type, "Name");
     
     test.equal(parser.parse("Name"), null);
