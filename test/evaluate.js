@@ -1,5 +1,6 @@
 
-var parsers = require('../lib/parsers');
+var parsers = require('../lib/parsers'),
+    contexts = require('../lib/contexts');
 
 exports['Evaluate integer'] = function (test) {
     var parser = parsers.createParser("123");
@@ -111,6 +112,18 @@ exports['Evaluate divide and subtract'] = function (test) {
     test.equal(parser.parse("Expression"), null);
 };
 
-
+exports['Evaluate local variable'] = function (test) {
+    var parser = parsers.createParser("one");
+    var context = contexts.createContext();
+    context.setLocalValue('one', 1);
+    
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.ok(result);
+    test.equal(result, 1);
+    
+    test.equal(parser.parse("Expression"), null);
+};
 
 
