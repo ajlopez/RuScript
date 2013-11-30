@@ -126,4 +126,18 @@ exports['Evaluate local variable'] = function (test) {
     test.equal(parser.parse("Expression"), null);
 };
 
+exports['Evaluate simple true equality'] = function (test) {
+    var parser = parsers.createParser("1 == 1");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(null);
+    
+    test.strictEqual(result, true);
+};
 
+exports['Evaluate simple false equality'] = function (test) {
+    var parser = parsers.createParser("1 == 2");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(null);
+    
+    test.strictEqual(result, false);
+};
