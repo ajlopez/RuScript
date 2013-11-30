@@ -151,3 +151,13 @@ exports['Evaluate simple assignment'] = function (test) {
     test.strictEqual(result, 1);
     test.strictEqual(context.getLocalValue("one"), 1);
 };
+
+exports['Evaluate simple if'] = function (test) {
+    var context = contexts.createContext();
+    var parser = parsers.createParser("if 1\n1\end");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.strictEqual(result, 1);
+};
+
