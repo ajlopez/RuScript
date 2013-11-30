@@ -154,10 +154,20 @@ exports['Evaluate simple assignment'] = function (test) {
 
 exports['Evaluate simple if'] = function (test) {
     var context = contexts.createContext();
-    var parser = parsers.createParser("if 1\n1\end");
+    var parser = parsers.createParser("if 1\n1\nend");
     var expr = parser.parse("Expression");
     var result = expr.value.evaluate(context);
     
     test.strictEqual(result, 1);
 };
+
+exports['Evaluate if with two expressions'] = function (test) {
+    var context = contexts.createContext();
+    var parser = parsers.createParser("if 1\n1\n2\nend");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.strictEqual(result, 2);
+};
+
 
