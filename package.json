@@ -10,7 +10,7 @@
     "test": "simpleunit test"
   }
 , "dependencies": {
-    "simplegrammar": "0.0.1"
+    "simplegrammar": "0.0.2"
   }
 , "devDependencies": {
     "simpleunit": "0.0.2"
