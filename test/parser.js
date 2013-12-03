@@ -80,3 +80,12 @@ exports['Get two statements with semicolon'] = function (test) {
     
     test.equal(parser.parse("Statement"), null);
 }
+
+exports['Get while expression'] = function (test) {
+    var parser = parsers.createParser("while 1\na=1\nend");
+    
+    var result = parser.parse("Expression");
+    test.ok(result);
+    
+    test.equal(parser.parse("Expression"), null);
+}
