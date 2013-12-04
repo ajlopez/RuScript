@@ -142,6 +142,14 @@ exports['Evaluate simple false equality'] = function (test) {
     test.strictEqual(result, false);
 };
 
+exports['Evaluate simple less comparison'] = function (test) {
+    var parser = parsers.createParser("1 < 2");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(null);
+    
+    test.strictEqual(result, true);
+};
+
 exports['Evaluate simple assignment'] = function (test) {
     var context = contexts.createContext();
     var parser = parsers.createParser("one = 1");
@@ -170,4 +178,15 @@ exports['Evaluate if with two expressions'] = function (test) {
     test.strictEqual(result, 2);
 };
 
+exports['Evaluate simple while'] = function (test) {
+    var context = contexts.createContext();
+    context.setLocalValue("a", 1);
+    var parser = parsers.createParser("while a < 10\na = 10\nend");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.strictEqual(result, null);
+    
+    test.equal(context.getLocalValue("a"), 10);
+};
 
