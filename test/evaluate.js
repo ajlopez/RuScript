@@ -150,6 +150,29 @@ exports['Evaluate simple less comparison'] = function (test) {
     test.strictEqual(result, true);
 };
 
+exports['Evaluate simple less comparison to false'] = function (test) {
+    var parser = parsers.createParser("1 < 1");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(null);
+    
+    test.strictEqual(result, false);
+};
+
+exports['Evaluate simple greater comparison'] = function (test) {
+    var parser = parsers.createParser("3 > 2");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(null);
+    
+    test.strictEqual(result, true);
+};
+
+exports['Evaluate simple greater comparison to false'] = function (test) {
+    var parser = parsers.createParser("1 > 2");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(null);
+    
+    test.strictEqual(result, false);
+};
 exports['Evaluate simple assignment'] = function (test) {
     var context = contexts.createContext();
     var parser = parsers.createParser("one = 1");
