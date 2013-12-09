@@ -262,3 +262,17 @@ exports['Evaluate simple while'] = function (test) {
     test.equal(context.getLocalValue("a"), 10);
 };
 
+exports['Evaluate while with two expressions'] = function (test) {
+    var context = contexts.createContext();
+    context.setLocalValue("a", 1);
+    var parser = parsers.createParser("while a < 10\na = 10\nb = 42\nend");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.strictEqual(result, null);
+    
+    test.equal(context.getLocalValue("a"), 10);    
+    test.equal(context.getLocalValue("b"), 42);
+};
+
+
