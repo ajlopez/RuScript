@@ -255,6 +255,15 @@ exports['Evaluate simple if'] = function (test) {
     test.strictEqual(result, 1);
 };
 
+exports['Evaluate simple if with false condition'] = function (test) {
+    var context = contexts.createContext();
+    var parser = parsers.createParser("if false\n1\nend");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.strictEqual(result, null);
+};
+
 exports['Evaluate if with two expressions'] = function (test) {
     var context = contexts.createContext();
     var parser = parsers.createParser("if 1\n1\n2\nend");
