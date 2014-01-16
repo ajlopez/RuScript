@@ -24,15 +24,29 @@ exports['Evaluate integer as term'] = function (test) {
     test.equal(parser.parse("Term"), null);
 };
 
-exports['Evaluate add integers'] = function (test) {
-    var parser = parsers.createParser("1+2");
-    var expr = parser.parse("Expression");
+exports['Evaluate integer as term'] = function (test) {
+    var parser = parsers.createParser("123");
+    var expr = parser.parse("Term");
     var result = expr.value.evaluate(null);
     
     test.ok(result);
-    test.equal(result, 3);
+    test.equal(result, 123);
     
-    test.equal(parser.parse("Expression"), null);
+    test.equal(parser.parse("Term"), null);
+};
+
+exports['Evaluate false'] = function (test) {
+    var parser = parsers.createParser("false");
+    var expr = parser.parse("Expression");
+    test.ok(expr);
+    test.strictEqual(expr.value.evaluate(null), false);
+};
+
+exports['Evaluate true'] = function (test) {
+    var parser = parsers.createParser("true");
+    var expr = parser.parse("Expression");
+    test.ok(expr);
+    test.strictEqual(expr.value.evaluate(null), true);
 };
 
 exports['Evaluate subtract integers'] = function (test) {
