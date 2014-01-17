@@ -300,6 +300,24 @@ exports['Evaluate unless with true condition'] = function (test) {
     test.strictEqual(result, null);
 };
 
+exports['Evaluate unless with else and false condition'] = function (test) {
+    var context = contexts.createContext();
+    var parser = parsers.createParser("unless false\n1\nelse\n2\nend");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.strictEqual(result, 1);
+};
+
+exports['Evaluate unless with else and true condition'] = function (test) {
+    var context = contexts.createContext();
+    var parser = parsers.createParser("unless true\n1\nelse\n2\nend");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.strictEqual(result, 2);
+};
+
 exports['Evaluate if with two expressions'] = function (test) {
     var context = contexts.createContext();
     var parser = parsers.createParser("if 1\n1\n2\nend");
