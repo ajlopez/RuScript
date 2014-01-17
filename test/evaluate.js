@@ -264,6 +264,24 @@ exports['Evaluate simple if with false condition'] = function (test) {
     test.strictEqual(result, null);
 };
 
+exports['Evaluate simple if with else and true condition'] = function (test) {
+    var context = contexts.createContext();
+    var parser = parsers.createParser("if true\n1\nelse\n2\nend");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.strictEqual(result, 1);
+};
+
+exports['Evaluate simple if with else and false condition'] = function (test) {
+    var context = contexts.createContext();
+    var parser = parsers.createParser("if false\n1\nelse\n2\nend");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.strictEqual(result, 2);
+};
+
 exports['Evaluate unless with false condition'] = function (test) {
     var context = contexts.createContext();
     var parser = parsers.createParser("unless false\n1\nend");
