@@ -98,3 +98,14 @@ exports['Get until expression'] = function (test) {
     
     test.equal(parser.parse("Expression"), null);
 }
+
+exports['Get class expression'] = function (test) {
+    var parser = parsers.createParser("class Dog\nend");
+    
+    var result = parser.parse("Expression");
+    test.ok(result);
+    test.ok(result.value);
+    test.equal(result.value.getName(), "Dog");
+    
+    test.equal(parser.parse("Expression"), null);
+}
