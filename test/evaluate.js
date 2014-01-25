@@ -268,6 +268,9 @@ exports['Evaluate simple if with else and true condition'] = function (test) {
     var context = contexts.createContext();
     var parser = parsers.createParser("if true\n1\nelse\n2\nend");
     var expr = parser.parse("Expression");
+    test.ok(expr);
+    test.ok(expr.value);
+    test.ok(expr.value.evaluate);
     var result = expr.value.evaluate(context);
     
     test.strictEqual(result, 1);
@@ -362,5 +365,20 @@ exports['Evaluate simple until'] = function (test) {
     test.strictEqual(result, null);
     
     test.equal(context.getLocalValue("a"), 10);
+};
+
+exports['Evaluate empty class'] = function (test) {
+    var context = contexts.createContext();
+    var parser = parsers.createParser("class Dog\nend");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.ok(result);
+    test.equal(result.getName(), "Dog");
+    
+    var cls = context.getLocalValue("Dog");
+    
+    test.ok(cls);
+    test.equal(cls.getName(), "Dog");
 };
 
