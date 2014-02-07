@@ -85,6 +85,18 @@ exports['Evaluate add and divide'] = function (test) {
     test.equal(parser.parse("Expression"), null);
 };
 
+exports['Evaluate add with parenthesis and multiply'] = function (test) {
+    var parser = parsers.createParser("(2+3)*4");
+    var expr = parser.parse("Expression");
+    test.ok(expr);
+    var result = expr.value.evaluate(null);
+    
+    test.ok(result);
+    test.equal(result, (2 + 3) * 4);
+    
+    test.equal(parser.parse("Expression"), null);
+};
+
 exports['Evaluate multiply and add'] = function (test) {
     var parser = parsers.createParser("2*3+4");
     var expr = parser.parse("Expression");
