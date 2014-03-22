@@ -406,3 +406,17 @@ exports['Evaluate and call def with integer return value'] = function (test) {
     
     test.equal(fun(), 42);
 };
+
+exports['Evaluate call with argument'] = function (test) {
+    var context = contexts.createContext();
+    var argument = null;
+    
+    context.setLocalValue('puts', function (arg) { argument = arg; return arg; });
+    
+    var parser = parsers.createParser("puts 42");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.equal(result, 42);
+    test.equal(argument, 42);
+}
