@@ -184,3 +184,12 @@ exports['Skip line comment'] = function (test) {
     test.equal(result.value.evaluate(), 42);
     test.equal(parser.next(), null);
 }
+
+exports['Get qualified name'] = function (test) {
+    var parser = parsers.createParser("a.b");
+    var result = parser.parse('QualifiedName');
+    test.ok(result);
+    test.equal(result.value.getName(), "b");
+    test.equal(result.value.getTarget().getName(), "a");
+}
+
