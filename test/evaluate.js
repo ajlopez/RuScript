@@ -375,3 +375,17 @@ exports['Evaluate empty class'] = function (test) {
     test.equal(cls.getName(), "Dog");
 };
 
+exports['Evaluate empty def'] = function (test) {
+    var context = contexts.createContext();
+    var parser = parsers.createParser("def foo\nend");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.ok(result);
+    test.equal(typeof result, "function");
+    
+    var fun = context.getLocalValue("foo");
+    
+    test.ok(fun);
+    test.strictEqual(result, fun);
+};
