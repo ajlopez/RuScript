@@ -110,6 +110,17 @@ exports['Get class expression'] = function (test) {
     test.equal(parser.parse("Expression"), null);
 }
 
+exports['Get class expression with empty def'] = function (test) {
+    var parser = parsers.createParser("class Dog\ndef foo\nend\nend");
+    
+    var result = parser.parse("Expression");
+    test.ok(result);
+    test.ok(result.value);
+    test.equal(result.value.getName(), "Dog");
+    
+    test.equal(parser.parse("Expression"), null);
+}
+
 exports['Get expression enclosed in parenthesis'] = function (test) {
     var parser = parsers.createParser("(2+3)");
     
