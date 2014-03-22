@@ -37,6 +37,18 @@ exports['Get name'] = function (test) {
     test.equal(parser.parse("Name"), null);
 }
 
+exports['Get name with underscore'] = function (test) {
+    var parser = parsers.createParser("get_name");
+    
+    var result = parser.parse("Name");
+    
+    test.ok(result);
+    test.equal(result.value.getName(), "get_name");
+    test.equal(result.type, "Name");
+    
+    test.equal(parser.parse("Name"), null);
+}
+
 exports['Get name with spaces'] = function (test) {
     var parser = parsers.createParser("  name   ");
     
