@@ -37,6 +37,20 @@ exports['Get name'] = function (test) {
     test.equal(parser.parse("Name"), null);
 }
 
+exports['Get name and integer'] = function (test) {
+    var parser = parsers.createParser("name 1");
+    
+    var result = parser.parse("Name");
+    
+    test.ok(result);
+    test.equal(result.value.getName(), "name");
+    test.equal(result.type, "Name");
+    
+    test.ok(parser.parse("Integer"));
+    
+    test.equal(parser.parse("Name"), null);
+}
+
 exports['Get name with underscore'] = function (test) {
     var parser = parsers.createParser("get_name");
     
@@ -44,6 +58,18 @@ exports['Get name with underscore'] = function (test) {
     
     test.ok(result);
     test.equal(result.value.getName(), "get_name");
+    test.equal(result.type, "Name");
+    
+    test.equal(parser.parse("Name"), null);
+}
+
+exports['Get name with digits'] = function (test) {
+    var parser = parsers.createParser("answer42");
+    
+    var result = parser.parse("Name");
+    
+    test.ok(result);
+    test.equal(result.value.getName(), "answer42");
     test.equal(result.type, "Name");
     
     test.equal(parser.parse("Name"), null);
