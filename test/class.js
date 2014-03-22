@@ -9,6 +9,8 @@ exports['empty class'] = function (test) {
     
     test.ok(result);
     test.equal(result.getName(), "Dog");
+    test.ok(result.$class);
+    test.ok(result.$class.getInstanceMethod("new"));
 }
 
 exports['class with def'] = function (test) {
