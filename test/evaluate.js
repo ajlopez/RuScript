@@ -389,3 +389,20 @@ exports['Evaluate empty def'] = function (test) {
     test.ok(fun);
     test.strictEqual(result, fun);
 };
+
+exports['Evaluate and call def with integer return value'] = function (test) {
+    var context = contexts.createContext();
+    var parser = parsers.createParser("def answer\n42\nend");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.ok(result);
+    test.equal(typeof result, "function");
+    
+    var fun = context.getLocalValue("answer");
+    
+    test.ok(fun);
+    test.strictEqual(result, fun);
+    
+    test.equal(fun(), 42);
+};
