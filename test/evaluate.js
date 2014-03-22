@@ -434,3 +434,15 @@ exports['Evaluate call with argument and parentheses'] = function (test) {
     test.equal(result, 42);
     test.equal(argument, 42);
 }
+
+exports['Evaluate call with two arguments'] = function (test) {
+    var context = contexts.createContext();
+    
+    context.setLocalValue('add', function (x, y) { return x + y; });
+    
+    var parser = parsers.createParser("add 3, 5");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.equal(result, 8);
+}
