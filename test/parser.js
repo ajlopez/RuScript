@@ -127,3 +127,11 @@ exports['Get expression enclosed in parenthesis and multiply'] = function (test)
     
     test.equal(parser.parse("Expression"), null);
 }
+
+exports['Skip line comment'] = function (test) {
+    var parser = parsers.createParser("# this is a comment\r\n42");
+    var result = parser.parse('Statement');
+    test.ok(result);
+    test.equal(result.value.evaluate(), 42);
+    test.equal(parser.next(), null);
+}
