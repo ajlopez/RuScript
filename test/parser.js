@@ -193,3 +193,10 @@ exports['Get qualified name'] = function (test) {
     test.equal(result.value.getTarget().getName(), "a");
 }
 
+exports['Get qualified call'] = function (test) {
+    var parser = parsers.createParser("a.b");
+    var result = parser.parse('QualifiedCall');
+    test.ok(result);
+}
+
+
