@@ -198,5 +198,3 @@ exports['Get qualified call'] = function (test) {
     var result = parser.parse('QualifiedCall');
     test.ok(result);
 }
-
-
