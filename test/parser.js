@@ -37,6 +37,17 @@ exports['Get string'] = function (test) {
     test.equal(parser.parse("String"), null);
 }
 
+exports['Get string with escaped characters'] = function (test) {
+    var parser = parsers.createParser('"foo\\n\\t\\r\\\\"');
+    
+    var result = parser.parse("String");
+    
+    test.ok(result);
+    test.equal(result.value.evaluate(null), 'foo\n\t\r\\');
+    test.equal(result.type, "String");
+    
+    test.equal(parser.parse("String"), null);
+}
 exports['Get name'] = function (test) {
     var parser = parsers.createParser("name");
     
