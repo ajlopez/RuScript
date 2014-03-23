@@ -25,6 +25,18 @@ exports['Get integer with spaces'] = function (test) {
     test.equal(parser.parse("Integer"), null);
 }
 
+exports['Get string'] = function (test) {
+    var parser = parsers.createParser('"foo"');
+    
+    var result = parser.parse("String");
+    
+    test.ok(result);
+    test.equal(result.value.evaluate(null), 'foo');
+    test.equal(result.type, "String");
+    
+    test.equal(parser.parse("String"), null);
+}
+
 exports['Get name'] = function (test) {
     var parser = parsers.createParser("name");
     
