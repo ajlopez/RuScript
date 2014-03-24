@@ -221,3 +221,31 @@ exports['Get qualified call'] = function (test) {
     var result = parser.parse('QualifiedCall');
     test.ok(result);
 }
+
+exports['Get empty def'] = function (test) {
+    var parser = parsers.createParser("def foo\nend");
+    var result = parser.parse('Statement');
+    test.ok(result);
+    test.equal(parser.next(), null);
+}
+
+exports['Get empty def with parenthesis'] = function (test) {
+    var parser = parsers.createParser("def foo()\nend");
+    var result = parser.parse('Statement');
+    test.ok(result);
+    test.equal(parser.next(), null);
+}
+
+exports['Get empty def with argument'] = function (test) {
+    var parser = parsers.createParser("def foo(a)\nend");
+    var result = parser.parse('Statement');
+    test.ok(result);
+    test.equal(parser.next(), null);
+}
+
+exports['Get empty def with arguments'] = function (test) {
+    var parser = parsers.createParser("def foo(a,b)\nend");
+    var result = parser.parse('Statement');
+    test.ok(result);
+    test.equal(parser.next(), null);
+}
