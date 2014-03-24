@@ -38,3 +38,8 @@ exports['execute add'] = function (test) {
     var context = rs.createContext();
     test.equal(rs.execute("def add(a,b)\na+b\nend\nadd(1, 2)\n", context), 3);
 }
+
+exports['execute add without parenthesis'] = function (test) {
+    var context = rs.createContext();
+    test.equal(rs.execute("def add(a,b)\na+b\nend\nadd 1, 2\n", context), 3);
+}
