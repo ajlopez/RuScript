@@ -1,1 +1,1 @@
-def fibo(n)  if n == 0    puts "zero"    1  else    if n == 1      puts "one"      1    else      fibo(n - 1) + fibo(n - 2)    end  endendx = 1while x <= 10  puts fibo(x)  x = x + 1end
+def fibo(n)  puts "n"  puts n    if n == 0    puts "zero"    1  else    if n == 1      puts "one"      1    else      puts n-1      puts n-2      fibo(n - 1) + fibo(n - 2)    end  endendx = 1while x <= 2  puts fibo(x)  x = x + 1end
