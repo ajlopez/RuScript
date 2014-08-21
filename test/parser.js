@@ -289,3 +289,10 @@ exports['Get empty def with arguments'] = function (test) {
     test.ok(result);
     test.equal(parser.next(), null);
 }
+
+exports['Get begin end'] = function (test) {
+    var parser = parsers.createParser("begin\na=1\nb=2\end");
+    var result = parser.parse('Expression');
+    test.ok(result);
+    test.equal(parser.next(), null);
+}
