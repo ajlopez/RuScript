@@ -151,8 +151,26 @@ exports['Get while expression'] = function (test) {
     test.equal(parser.parse("Expression"), null);
 }
 
+exports['Get while expression with do'] = function (test) {
+    var parser = parsers.createParser("while 1 do\na=1\nend");
+    
+    var result = parser.parse("Expression");
+    test.ok(result);
+    
+    test.equal(parser.parse("Expression"), null);
+}
+
 exports['Get until expression'] = function (test) {
     var parser = parsers.createParser("until 1\na=1\nend");
+    
+    var result = parser.parse("Expression");
+    test.ok(result);
+    
+    test.equal(parser.parse("Expression"), null);
+}
+
+exports['Get until expression with do'] = function (test) {
+    var parser = parsers.createParser("until 1 do\na=1\nend");
     
     var result = parser.parse("Expression");
     test.ok(result);
