@@ -10,8 +10,11 @@ def fibo(n)
       puts "one"
       1
     else      puts "other"      n1 = n-1      n2 = n-2
+      puts "n1"
       puts n1
-      puts n2      f1 = fibo(n1)      f2 = fibo(n2)      f1 + f2
+      puts "n2"
+      puts n2
+      puts "n2b"      f1 = fibo(n1)      f2 = fibo(n2)      f1 + f2
     end
   end
 end
