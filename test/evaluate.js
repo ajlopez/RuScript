@@ -17,6 +17,13 @@ exports['Evaluate integer'] = function (test) {
     test.equal(result, 123);
 };
 
+exports['Evaluate string'] = function (test) {
+    var result = evaluate('"foo"', "String", null, test);
+    
+    test.ok(result);
+    test.equal(result, "foo");
+};
+
 exports['Evaluate integer as term'] = function (test) {
     var result = evaluate("123", "Term", null, test);
     
