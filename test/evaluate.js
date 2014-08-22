@@ -24,6 +24,13 @@ exports['Evaluate string'] = function (test) {
     test.equal(result, "foo");
 };
 
+exports['Evaluate string concatenation'] = function (test) {
+    var result = evaluate('"Hello, " + "World"', "Expression", null, test);
+    
+    test.ok(result);
+    test.equal(result, "Hello, World");
+};
+
 exports['Evaluate integer as term'] = function (test) {
     var result = evaluate("123", "Term", null, test);
     
