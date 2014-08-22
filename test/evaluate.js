@@ -473,3 +473,12 @@ exports['Evaluate call with two arguments'] = function (test) {
     
     test.equal(result, 8);
 }
+
+exports['Evaluate begin end'] = function (test) {
+    var context = contexts.createContext();
+    var parser = parsers.createParser("begin\n1\n42\nend");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    test.equal(result, 42);
+}
+
