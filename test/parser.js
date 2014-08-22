@@ -48,6 +48,27 @@ exports['Get string with escaped characters'] = function (test) {
     
     test.equal(parser.parse("String"), null);
 }
+
+exports['Get array'] = function (test) {
+    var parser = parsers.createParser("[1,2,3]");
+    
+    var result = parser.parse("Array");
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.ok(result.value.evaluate);
+}
+
+exports['Get empty array'] = function (test) {
+    var parser = parsers.createParser("[]");
+    
+    var result = parser.parse("Array");
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.ok(result.value.evaluate);
+}
+
 exports['Get name'] = function (test) {
     var parser = parsers.createParser("name");
     

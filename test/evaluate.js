@@ -45,6 +45,14 @@ exports['Evaluate integer as term'] = function (test) {
     test.equal(result, 123);
 };
 
+exports['Evaluate array'] = function (test) {
+    var result = evaluate("[1,2,3]", "Expression", null, test);
+    
+    test.ok(result);
+    test.ok(Array.isArray(result));
+    test.deepEqual(result, [1,2,3]);
+};
+
 exports['Evaluate false'] = function (test) {
     var result = evaluate("false", "Expression", null, test);
     test.strictEqual(result, false);
