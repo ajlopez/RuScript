@@ -31,6 +31,13 @@ exports['Evaluate string'] = function (test) {
     test.equal(result, "foo");
 };
 
+exports['Evaluate string method'] = function (test) {
+    var result = evaluate('"123".to_i', "Expression", null, test);
+    
+    test.ok(result);
+    test.strictEqual(result, 123);
+};
+
 exports['Evaluate string concatenation'] = function (test) {
     var result = evaluate('"Hello, " + "World"', "Expression", null, test);
     
