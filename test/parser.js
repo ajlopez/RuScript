@@ -69,6 +69,19 @@ exports['Get empty array'] = function (test) {
     test.ok(result.value.evaluate);
 }
 
+exports['Get array expression'] = function (test) {
+    var parser = parsers.createParser("a[0]");
+    
+    var result = parser.parse("Term");
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.ok(result.value.evaluate);
+    test.equal(result.value.getName, null);
+    
+    test.equal(parser.next(), null);
+}
+
 exports['Get name'] = function (test) {
     var parser = parsers.createParser("name");
     

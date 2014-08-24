@@ -60,6 +60,16 @@ exports['Evaluate array'] = function (test) {
     test.deepEqual(result, [1,2,3]);
 };
 
+exports['Evaluate array expression'] = function (test) {
+    var context = contexts.createContext();
+    context.setLocalValue("a", [1,2,3]);
+    
+    var result = evaluate("a[1]", "Expression", context, test);
+    
+    test.ok(result);
+    test.equal(result, 2);
+};
+
 exports['Evaluate false'] = function (test) {
     var result = evaluate("false", "Expression", null, test);
     test.strictEqual(result, false);
