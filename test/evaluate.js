@@ -528,3 +528,11 @@ exports['Evaluate begin end'] = function (test) {
     test.equal(result, 42);
 }
 
+exports['Evaluate JavaScript global name'] = function (test) {
+    global.myglobal = 42;
+    var context = contexts.createContext();
+    var parser = parsers.createParser("@global.myglobal");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    test.equal(result, 42);
+}
