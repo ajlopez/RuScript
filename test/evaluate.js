@@ -536,3 +536,21 @@ exports['Evaluate JavaScript global name'] = function (test) {
     var result = expr.value.evaluate(context);
     test.equal(result, 42);
 }
+
+exports['Evaluate JavaScript global object property'] = function (test) {
+    global.myglobal = { name: 'Adam' };
+    var context = contexts.createContext();
+    var parser = parsers.createParser("@global.myglobal.name");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    test.equal(result, 'Adam');
+}
+
+exports['Evaluate JavaScript global object call'] = function (test) {
+    global.myglobal = 42;
+    var context = contexts.createContext();
+    var parser = parsers.createParser("@global.myglobal.toString()");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    test.strictEqual(result, '42');
+}
