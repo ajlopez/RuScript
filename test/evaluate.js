@@ -528,10 +528,20 @@ exports['Evaluate begin end'] = function (test) {
     test.equal(result, 42);
 }
 
+exports['Evaluate JavaScript namespace and name'] = function (test) {
+    global.myglobal = 42;
+    var context = contexts.createContext();
+    var parser = parsers.createParser("js.myglobal");
+    //parser.options({ log: true });
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    test.equal(result, 42);
+}
+
 exports['Evaluate JavaScript global name'] = function (test) {
     global.myglobal = 42;
     var context = contexts.createContext();
-    var parser = parsers.createParser("@global.myglobal");
+    var parser = parsers.createParser("js.myglobal");
     //parser.options({ log: true });
     var expr = parser.parse("Expression");
     var result = expr.value.evaluate(context);
@@ -541,7 +551,7 @@ exports['Evaluate JavaScript global name'] = function (test) {
 exports['Evaluate JavaScript global object property'] = function (test) {
     global.myglobal = { name: 'Adam' };
     var context = contexts.createContext();
-    var parser = parsers.createParser("@global.myglobal.name");
+    var parser = parsers.createParser("js.myglobal.name");
     var expr = parser.parse("Expression");
     var result = expr.value.evaluate(context);
     test.equal(result, 'Adam');
@@ -550,7 +560,7 @@ exports['Evaluate JavaScript global object property'] = function (test) {
 exports['Evaluate JavaScript global object call'] = function (test) {
     global.myglobal = 42;
     var context = contexts.createContext();
-    var parser = parsers.createParser("@global.myglobal.toString()");
+    var parser = parsers.createParser("js.myglobal.toString()");
     var expr = parser.parse("Expression");
     var result = expr.value.evaluate(context);
     test.strictEqual(result, '42');
