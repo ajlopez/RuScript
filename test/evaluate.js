@@ -532,6 +532,7 @@ exports['Evaluate JavaScript global name'] = function (test) {
     global.myglobal = 42;
     var context = contexts.createContext();
     var parser = parsers.createParser("@global.myglobal");
+    //parser.options({ log: true });
     var expr = parser.parse("Expression");
     var result = expr.value.evaluate(context);
     test.equal(result, 42);
