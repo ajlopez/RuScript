@@ -528,6 +528,25 @@ exports['Evaluate begin end'] = function (test) {
     test.equal(result, 42);
 }
 
+exports['Evaluate begin end with assignment'] = function (test) {
+    var context = contexts.createContext();
+    var parser = parsers.createParser("begin\n1\nfoo = 41\nfoo = 42\nfoo\nend");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    test.equal(result, 42);
+}
+
+exports['Evaluate begin end with assignment and instance variable'] = function (test) {
+    var context = contexts.createContext();
+    context.$self = { };
+    var parser = parsers.createParser("begin\n1\n@foo = 42\nend");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    test.ok(context.$self.$vars);
+    test.equal(context.$self.$vars.foo, 42);
+    test.equal(result, 42);
+}
+
 exports['Evaluate JavaScript namespace and name'] = function (test) {
     global.myglobal = 42;
     var context = contexts.createContext();

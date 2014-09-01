@@ -45,7 +45,7 @@ exports['new object from class with def'] = function (test) {
 
 exports['invoke new object method'] = function (test) {
     var context = rs.createContext();
-    var result = rs.execute("class Dog\n\def get_value\n42\end\nend\nfido = Dog.new\nfido.get_value", context);
+    var result = rs.execute("class Dog\n\def get_value\n42\nend\nend\nfido = Dog.new\nfido.get_value", context);
     
     test.ok(result);
     test.equal(result, 42)
@@ -53,8 +53,16 @@ exports['invoke new object method'] = function (test) {
 
 exports['use instance variable'] = function (test) {
     var context = rs.createContext();
-    var result = rs.execute("class Dog\n\def get_value\n@foo\end\ndef set_value(value)\n@foo = value\end\nend\nfido = Dog.new\nfido.set_value 42\nfido.get_value", context);
+    var result = rs.execute("class Dog\n\def get_value\n@foo = 42\n@foo\nend\nend\nfido = Dog.new\nfido.get_value", context);
     
     test.ok(result);
-    test.equal(result, 42)
+    test.equal(result, 42);
+    test.ok(context.getLocalValue('fido'));
+    
+    var fido = context.getLocalValue('fido');
+    
+    test.ok(fido.$class);
+    test.ok(fido.$vars);
+    test.ok(fido.$vars.foo);
+    test.equal(fido.$vars.foo, 42);
 }
