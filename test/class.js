@@ -50,3 +50,11 @@ exports['invoke new object method'] = function (test) {
     test.ok(result);
     test.equal(result, 42)
 }
+
+exports['use instance variable'] = function (test) {
+    var context = rs.createContext();
+    var result = rs.execute("class Dog\n\def get_value\n@foo\end\ndef set_value(value)\n@foo = value\end\nend\nfido = Dog.new\nfido.set_value 42\nfido.get_value", context);
+    
+    test.ok(result);
+    test.equal(result, 42)
+}
