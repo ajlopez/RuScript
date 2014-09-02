@@ -66,3 +66,19 @@ exports['use instance variable'] = function (test) {
     test.ok(fido.$vars.foo);
     test.equal(fido.$vars.foo, 42);
 }
+
+exports['use class variable'] = function (test) {
+    var context = rs.createContext();
+    var result = rs.execute("class Dog\n\def get_value\n@@foo = 42\n@@foo\nend\nend\nfido = Dog.new\nfido.get_value", context);
+    
+    test.ok(result);
+    test.equal(result, 42);
+    test.ok(context.getLocalValue('fido'));
+    
+    var fido = context.getLocalValue('fido');
+    
+    test.ok(fido.$class);
+    test.ok(fido.$class.$vars);
+    test.ok(fido.$class.$vars.foo);
+    test.equal(fido.$class.$vars.foo, 42);
+}
