@@ -1,10 +1,7 @@
 
-var ruscript = require('../..'),
-    fs = require('fs');
+var ruscript = require('../..');
 
-var text = fs.readFileSync(process.argv[2]).toString();
-
-var context = ruscript.createContext();
+var context = ruscript.context();
 
 context.setLocalValue('assert', function (test, msg) {
     if (test)
@@ -16,5 +13,6 @@ context.setLocalValue('assert', function (test, msg) {
     throw "assertion failure";
 });
 
-ruscript.execute(text, context);
+for (var k = 2; k < process.argv.length; k++)
+    ruscript.executeFile(process.argv[k], context);
 
