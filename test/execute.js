@@ -1,5 +1,6 @@
 
 var rs = require('..');
+var path = require('path');
 
 exports['execute integer'] = function (test) {
     test.equal(rs.execute("42"), 42);
@@ -43,3 +44,8 @@ exports['execute add without parenthesis'] = function (test) {
     var context = rs.createContext();
     test.equal(rs.execute("def add(a,b)\na+b\nend\nadd 1, 2\n", context), 3);
 }
+
+exports['execute file with integer'] = function (test) {
+    test.equal(rs.executeFile(path.join(__dirname, "fortytwo.rb")), 42);
+}
+
