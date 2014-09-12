@@ -223,6 +223,17 @@ exports['Get class expression'] = function (test) {
     test.equal(parser.parse("Expression"), null);
 }
 
+exports['Get class expression with super class'] = function (test) {
+    var parser = parsers.createParser("class Dog < Animal\nend");
+    
+    var result = parser.parse("Expression");
+    test.ok(result);
+    test.ok(result.value);
+    test.equal(result.value.getName(), "Dog");
+    
+    test.equal(parser.parse("Expression"), null);
+}
+
 exports['Get class expression with empty def'] = function (test) {
     var parser = parsers.createParser("class Dog\ndef foo\nend\nend");
     
