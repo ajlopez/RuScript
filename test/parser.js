@@ -219,6 +219,7 @@ exports['Get class expression'] = function (test) {
     test.ok(result);
     test.ok(result.value);
     test.equal(result.value.getName(), "Dog");
+    test.equal(result.value.getSuperName(), null);
     
     test.equal(parser.parse("Expression"), null);
 }
@@ -230,6 +231,7 @@ exports['Get class expression with super class'] = function (test) {
     test.ok(result);
     test.ok(result.value);
     test.equal(result.value.getName(), "Dog");
+    test.equal(result.value.getSuperName(), 'Animal');
     
     test.equal(parser.parse("Expression"), null);
 }
