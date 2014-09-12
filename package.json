@@ -15,7 +15,7 @@
   },
   "main": "./lib/ruscript.js",
   "engines": {
-    "node": ">= 0.6.0 && < 0.11.0"
+    "node": ">= 0.6.0 && < 0.13.0"
   },
   "scripts": {
     "test": "simpleunit test"
@@ -24,6 +24,6 @@
     "simplegrammar": "0.0.10"
   },
   "devDependencies": {
-    "simpleunit": "0.0.4"
+    "simpleunit": "0.0.5"
   }
 }
