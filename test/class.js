@@ -94,6 +94,27 @@ exports['invoke new object method'] = function (test) {
     test.equal(result, 42)
 }
 
+exports['invoke new object method using inheritance'] = function (test) {
+    var context = rs.context();
+    
+    var text = [
+        "class Animal",
+        "  def get_value",
+        "    42",
+        "  end",
+        "end",
+        "class Dog < Animal",
+        "end",
+        "fido = Dog.new",
+        "fido.get_value"
+    ].join('\n');
+    
+    var result = rs.execute(text, context);
+    
+    test.ok(result);
+    test.equal(result, 42)
+}
+
 exports['use instance variable'] = function (test) {
     var context = rs.context();
     
