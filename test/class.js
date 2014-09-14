@@ -61,6 +61,50 @@ exports['new object from empty class'] = function (test) {
     test.strictEqual(result.$class, context.getValue("Dog"));
 }
 
+exports['new object using initialize'] = function (test) {
+    var context = rs.context();
+    
+    var text = [
+        "class Dog",
+        "  def initialize",
+        "    @foo = 42",
+        "  end",
+        "end",
+        "Dog.new"
+    ].join('\n');
+    
+    var result = rs.execute(text, context);
+    
+    test.ok(result);
+    test.ok(result.$vars);
+    test.equal(result.$vars.foo, 42);
+    
+    test.ok(result.$class)
+    test.strictEqual(result.$class, context.getValue("Dog"));
+}
+
+exports['new object using initialize with arguments'] = function (test) {
+    var context = rs.context();
+    
+    var text = [
+        "class Dog",
+        "  def initialize(value)",
+        "    @foo = value",
+        "  end",
+        "end",
+        "Dog.new(42)"
+    ].join('\n');
+    
+    var result = rs.execute(text, context);
+    
+    test.ok(result);
+    test.ok(result.$vars);
+    test.equal(result.$vars.foo, 42);
+    
+    test.ok(result.$class)
+    test.strictEqual(result.$class, context.getValue("Dog"));
+}
+
 exports['class with def'] = function (test) {
     var context = rs.context();
     
