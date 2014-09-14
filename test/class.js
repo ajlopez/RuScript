@@ -19,6 +19,32 @@ exports['empty class'] = function (test) {
     test.ok(result.$class.getInstanceMethod("new"));
 }
 
+exports['empty classes with inheritance'] = function (test) {
+    var context = rs.context();
+    
+    var text = [
+        "class Animal",
+        "end",
+        "class Dog < Animal",
+        "end"
+    ].join('\n');
+    
+    rs.execute(text, context);
+    
+    var result = context.getLocalValue("Dog");
+    
+    test.ok(result);
+    test.equal(result.getName(), "Dog");
+    test.ok(result.$class);
+    test.ok(result.$class.getInstanceMethod("new"));
+    test.ok(result.$superclass);
+    
+    var animalcls = context.getLocalValue("Animal");
+    
+    test.ok(animalcls);
+    test.strictEqual(result.$superclass, animalcls);
+}
+
 exports['new object from empty class'] = function (test) {
     var context = rs.context();
     
