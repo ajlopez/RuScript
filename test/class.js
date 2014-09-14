@@ -3,7 +3,13 @@ var rs = require('..');
 
 exports['empty class'] = function (test) {
     var context = rs.context();
-    rs.execute("class Dog\n\end", context);
+    
+    var text = [
+        "class Dog",
+        "end"
+    ].join('\n');
+    
+    rs.execute(text, context);
     
     var result = context.getLocalValue("Dog");
     
@@ -15,7 +21,14 @@ exports['empty class'] = function (test) {
 
 exports['new object from empty class'] = function (test) {
     var context = rs.context();
-    var result = rs.execute("class Dog\n\end\nDog.new", context);
+    
+    var text = [
+        "class Dog",
+        "end",
+        "Dog.new"
+    ].join('\n');
+    
+    var result = rs.execute(text, context);
     
     test.ok(result);
     test.ok(result.$class)
@@ -24,7 +37,16 @@ exports['new object from empty class'] = function (test) {
 
 exports['class with def'] = function (test) {
     var context = rs.context();
-    rs.execute("class Dog\n\def get_value\n42\end\nend", context);
+    
+    var text = [
+        "class Dog",
+        "  def get_value",
+        "    42",
+        "  end",
+        "end"
+    ].join('\n');
+    
+    rs.execute(text, context);
     
     var result = context.getLocalValue("Dog");
     
@@ -35,7 +57,17 @@ exports['class with def'] = function (test) {
 
 exports['new object from class with def'] = function (test) {
     var context = rs.context();
-    var result = rs.execute("class Dog\n\def get_value\n42\end\nend\nfido = Dog.new", context);
+    
+    var text = [
+        "class Dog",
+        "  def get_value",
+        "    42",
+        "  end",
+        "end",
+        "fido = Dog.new"
+    ].join('\n');
+    
+    var result = rs.execute(text, context);
     
     test.ok(result);
     test.ok(result.$class)
@@ -45,7 +77,18 @@ exports['new object from class with def'] = function (test) {
 
 exports['invoke new object method'] = function (test) {
     var context = rs.context();
-    var result = rs.execute("class Dog\n\def get_value\n42\nend\nend\nfido = Dog.new\nfido.get_value", context);
+    
+    var text = [
+        "class Dog",
+        "  def get_value",
+        "    42",
+        "  end",
+        "end",
+        "fido = Dog.new",
+        "fido.get_value"
+    ].join('\n');
+    
+    var result = rs.execute(text, context);
     
     test.ok(result);
     test.equal(result, 42)
@@ -53,7 +96,19 @@ exports['invoke new object method'] = function (test) {
 
 exports['use instance variable'] = function (test) {
     var context = rs.context();
-    var result = rs.execute("class Dog\n\def get_value\n@foo = 42\n@foo\nend\nend\nfido = Dog.new\nfido.get_value", context);
+    
+    var text = [
+        "class Dog",
+        "  def get_value",
+        "    @foo = 42",
+        "    @foo",
+        "  end",
+        "end",
+        "fido = Dog.new",
+        "fido.get_value"
+    ].join('\n');
+    
+    var result = rs.execute(text, context);
     
     test.ok(result);
     test.equal(result, 42);
@@ -69,7 +124,19 @@ exports['use instance variable'] = function (test) {
 
 exports['use class variable'] = function (test) {
     var context = rs.context();
-    var result = rs.execute("class Dog\n\def get_value\n@@foo = 42\n@@foo\nend\nend\nfido = Dog.new\nfido.get_value", context);
+    
+    var text = [
+        "class Dog",
+        "  def get_value",
+        "    @@foo = 42",
+        "    @@foo",
+        "  end",
+        "end",
+        "fido = Dog.new",
+        "fido.get_value"
+    ].join('\n');
+    
+    var result = rs.execute(text, context);
     
     test.ok(result);
     test.equal(result, 42);
