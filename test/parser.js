@@ -316,6 +316,13 @@ exports['Get empty def'] = function (test) {
     test.equal(parser.next(), null);
 }
 
+exports['Get empty def using self'] = function (test) {
+    var parser = parsers.createParser("def self.foo\nend");
+    var result = parser.parse('Statement');
+    test.ok(result);
+    test.equal(parser.next(), null);
+}
+
 exports['Get empty def with parenthesis'] = function (test) {
     var parser = parsers.createParser("def foo()\nend");
     var result = parser.parse('Statement');
