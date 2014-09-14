@@ -125,6 +125,26 @@ exports['class with def'] = function (test) {
     test.ok(result.getInstanceMethod("get_value"));
 }
 
+exports['class with class def'] = function (test) {
+    var context = rs.context();
+    
+    var text = [
+        "class Dog",
+        "  def self.get_value",
+        "    42",
+        "  end",
+        "end"
+    ].join('\n');
+    
+    rs.execute(text, context);
+    
+    var result = context.getLocalValue("Dog");
+    
+    test.ok(result);
+    test.equal(result.getName(), "Dog");
+    test.ok(result.getClassMethod("get_value"));
+}
+
 exports['new object from class with def'] = function (test) {
     var context = rs.context();
     
@@ -143,6 +163,24 @@ exports['new object from class with def'] = function (test) {
     test.ok(result.$class)
     test.strictEqual(result.$class, context.getValue("Dog"));
     test.ok(result.$class.getInstanceMethod("get_value"));
+}
+
+exports['invoke class method'] = function (test) {
+    var context = rs.context();
+    
+    var text = [
+        "class Dog",
+        "  def self.get_value",
+        "    42",
+        "  end",
+        "end",
+        "Dog.get_value"
+    ].join('\n');
+    
+    var result = rs.execute(text, context);
+    
+    test.ok(result);
+    test.equal(result, 42);
 }
 
 exports['invoke new object method'] = function (test) {
