@@ -364,3 +364,15 @@ exports['Get class variable'] = function (test) {
     test.ok(result);
     test.equal(parser.next(), null);
 }
+
+exports['Get expression with unless'] = function (test) {
+    var parser = parsers.createParser("a unless b");
+    
+    var result = parser.parse("Expression");
+    
+    test.ok(result);
+    test.equal(result.type, "Expression");
+    
+    test.equal(parser.parse("Expression"), null);
+}
+
