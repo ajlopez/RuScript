@@ -342,9 +342,27 @@ exports['Evaluate unless with true condition'] = function (test) {
     test.strictEqual(result, null);
 };
 
-exports['Evaluate unless with else and false condition'] = function (test) {
+exports['Evaluate unless with false condition'] = function (test) {
     var context = contexts.createContext();
-    var parser = parsers.createParser("unless false\n1\nelse\n2\nend");
+    var parser = parsers.createParser("unless false\n1\nend");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.strictEqual(result, 1);
+};
+
+exports['Evaluate unless at end with true condition'] = function (test) {
+    var context = contexts.createContext();
+    var parser = parsers.createParser("1 unless true");
+    var expr = parser.parse("Expression");
+    var result = expr.value.evaluate(context);
+    
+    test.strictEqual(result, null);
+};
+
+exports['Evaluate unless at end with else and false condition'] = function (test) {
+    var context = contexts.createContext();
+    var parser = parsers.createParser("1 unless false");
     var expr = parser.parse("Expression");
     var result = expr.value.evaluate(context);
     
