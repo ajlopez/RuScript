@@ -26,3 +26,12 @@ exports['execute require only once'] = function (test) {
     test.equal(1, context.getValue("a"));
 }
 
+exports['execute require with local require'] = function (test) {
+    var context = rs.context();
+    context.setLocalValue("a", 0);
+    
+    rs.execute('require("test/requireinca.rb")', context);
+        
+    test.equal(1, context.getValue("a"));
+}
+
