@@ -81,6 +81,33 @@ exports['Get empty array'] = function (test) {
     test.ok(result.value.evaluate);
 }
 
+exports['Get dot'] = function (test) {
+    var parser = parsers.createParser(".");
+    
+    var result = parser.parse("Dot");
+    
+    test.ok(result);
+    test.ok(result.value);
+}
+
+exports['Get logical or'] = function (test) {
+    var parser = parsers.createParser("||");
+    
+    var result = parser.parse("LogicalOr");
+    
+    test.ok(result);
+    test.ok(result.value);
+}
+
+exports['Get logical and'] = function (test) {
+    var parser = parsers.createParser("&&");
+    
+    var result = parser.parse("LogicalAnd");
+    
+    test.ok(result);
+    test.ok(result.value);
+}
+
 exports['Get array expression'] = function (test) {
     var parser = parsers.createParser("a[0]");
     

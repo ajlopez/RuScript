@@ -24,6 +24,42 @@ exports['Evaluate integer method'] = function (test) {
     test.strictEqual(result, "123");
 };
 
+exports['Evaluate true'] = function (test) {
+    var result = evaluate("true", "Expression", null, test);
+    
+    test.ok(result);
+    test.strictEqual(result, true);
+};
+
+exports['Evaluate false'] = function (test) {
+    var result = evaluate("false", "Expression", null, test);
+    
+    test.ok(result);
+    test.strictEqual(result, false);
+};
+
+exports['Evaluate logical or'] = function (test) {
+    var result = evaluate("false || true", "Expression", null, test);
+    
+    test.ok(result);
+    test.strictEqual(result, true);
+
+    result = evaluate("false || false", "Expression", null, test);
+    
+    test.strictEqual(result, false);
+};
+
+exports['Evaluate logical and'] = function (test) {
+    var result = evaluate("true && true", "Expression", null, test);
+    
+    test.ok(result);
+    test.strictEqual(result, true);
+
+    result = evaluate("true && false", "Expression", null, test);
+    
+    test.strictEqual(result, false);
+};
+
 exports['Evaluate string'] = function (test) {
     var result = evaluate('"foo"', "String", null, test);
     
