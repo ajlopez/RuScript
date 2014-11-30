@@ -183,6 +183,14 @@ exports['Get name with spaces'] = function (test) {
     test.equal(parser.parse("Name"), null);
 }
 
+exports['Get modulus expression'] = function (test) {
+    var parser = parsers.createParser("3%2");
+    
+    var result = parser.parse("Expression");
+    test.ok(result);
+    test.equal(parser.next(), null);
+}
+
 exports['Get statement with end of line'] = function (test) {
     var parser = parsers.createParser("1+2\n");
     
