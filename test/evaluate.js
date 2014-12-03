@@ -242,6 +242,12 @@ exports['Evaluate simple false equality'] = function (test) {
     test.strictEqual(result, false);
 };
 
+exports['Evaluate simple comparison'] = function (test) {
+    test.equal(evaluate('1 <=> 2', "Expression", null, test), -1);
+    test.equal(evaluate('2 <=> 2', "Expression", null, test), 0);
+    test.equal(evaluate('3 <=> 2', "Expression", null, test), 1);
+};
+
 exports['Evaluate simple false not equality'] = function (test) {
     var parser = parsers.createParser("1 != 1");
     var expr = parser.parse("Expression");
