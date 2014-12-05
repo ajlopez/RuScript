@@ -133,6 +133,30 @@ exports['Get name'] = function (test) {
     test.equal(parser.parse("Name"), null);
 }
 
+exports['Get keyword'] = function (test) {
+    var parser = parsers.createParser(":foo");
+    
+    var result = parser.parse("Keyword");
+    
+    test.ok(result);
+    test.equal(result.value.getName(), ":foo");
+    test.equal(result.type, "Keyword");
+    
+    test.equal(parser.parse("Keyword"), null);
+}
+
+exports['Get keyword as Term'] = function (test) {
+    var parser = parsers.createParser(":foo");
+    
+    var result = parser.parse("Term");
+    
+    test.ok(result);
+    test.equal(result.value.getName(), ":foo");
+    test.equal(result.type, "Term");
+    
+    test.equal(parser.parse("Term"), null);
+}
+
 exports['Get name and integer'] = function (test) {
     var parser = parsers.createParser("name 1");
     
