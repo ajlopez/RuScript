@@ -60,6 +60,13 @@ exports['Evaluate logical and'] = function (test) {
     test.strictEqual(result, false);
 };
 
+exports['Evaluate binary or'] = function (test) {
+    var result = evaluate("1 | 2", "Expression", null, test);
+    
+    test.ok(result);
+    test.strictEqual(result, 3);
+};
+
 exports['Evaluate string'] = function (test) {
     var result = evaluate('"foo"', "String", null, test);
     
