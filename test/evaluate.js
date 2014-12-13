@@ -74,6 +74,13 @@ exports['Evaluate binary xor'] = function (test) {
     test.strictEqual(result, 15 ^ 2);
 };
 
+exports['Evaluate binary not'] = function (test) {
+    var result = evaluate("~15", "Expression", null, test);
+    
+    test.ok(result);
+    test.strictEqual(result, ~15);
+};
+
 exports['Evaluate string'] = function (test) {
     var result = evaluate('"foo"', "String", null, test);
     
