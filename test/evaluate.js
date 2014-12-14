@@ -74,6 +74,20 @@ exports['Evaluate binary xor'] = function (test) {
     test.strictEqual(result, 15 ^ 2);
 };
 
+exports['Evaluate binary left shift'] = function (test) {
+    var result = evaluate("15 << 2", "Expression", null, test);
+    
+    test.ok(result);
+    test.strictEqual(result, 15 << 2);
+};
+
+exports['Evaluate binary right shift'] = function (test) {
+    var result = evaluate("15 >> 2", "Expression", null, test);
+    
+    test.ok(result);
+    test.strictEqual(result, 15 >> 2);
+};
+
 exports['Evaluate binary not'] = function (test) {
     var result = evaluate("~15", "Expression", null, test);
     
