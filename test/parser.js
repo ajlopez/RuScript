@@ -13,6 +13,18 @@ exports['Get integer'] = function (test) {
     test.equal(parser.parse("Integer"), null);
 }
 
+exports['Get negative integer'] = function (test) {
+    var parser = parsers.createParser("-123");
+    
+    var result = parser.parse("Integer");
+    
+    test.ok(result);
+    test.equal(result.value.evaluate(null), -123);
+    test.equal(result.type, "Integer");
+    
+    test.equal(parser.parse("Integer"), null);
+}
+
 exports['Get real'] = function (test) {
     var parser = parsers.createParser("123.45");
     
@@ -20,6 +32,18 @@ exports['Get real'] = function (test) {
     
     test.ok(result);
     test.equal(result.value.evaluate(null), 123.45);
+    test.equal(result.type, "Real");
+    
+    test.equal(parser.parse("Real"), null);
+}
+
+exports['Get negative real'] = function (test) {
+    var parser = parsers.createParser("-123.45");
+    
+    var result = parser.parse("Real");
+    
+    test.ok(result);
+    test.equal(result.value.evaluate(null), -123.45);
     test.equal(result.type, "Real");
     
     test.equal(parser.parse("Real"), null);
